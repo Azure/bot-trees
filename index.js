@@ -2,6 +2,7 @@ var path = require('path');
 var util = require('util');
 var express = require('express');
 var builder = require('botbuilder');
+var azure = require('botbuilder-azure'); 
 var GraphDialog = require('bot-graph-dialog');
 var config = require('./config');
 var fs = require('fs');
@@ -12,12 +13,34 @@ var app = express();
 var microsoft_app_id = config.get('MICROSOFT_APP_ID');
 var microsoft_app_password = config.get('MICROSOFT_APP_PASSWORD');
 
-var connector = new builder.ChatConnector({
-    appId: microsoft_app_id,
-    appPassword: microsoft_app_password,
-  });
+var botStateOptions = {
+  host: config.get('COSMOS_DB_HOST'), 
+  masterKey: config.get('COSMOS_DB_KEY'), 
+  database: 'botdocs',   
+  collection: `botdata`
+};
+
+var botStorageService;
+
+// either use a CosmosDB as the bot state service or the default in-memory implementation
+if (botStateOptions.host && botStateOptions.masterKey) {
+  console.info(`Using cosmos DB as a state service: ${botStateOptions.host}`);
   
-var bot = new builder.UniversalBot(connector);
+  var docDbClient = new azure.DocumentDbClient(botStateOptions);
+  botStorageService = new azure.AzureBotStorage({ gzipData: false }, docDbClient);
+}
+else {
+  console.warn('In production environment, you should provide your own bot storage implementation. More info: https://docs.microsoft.com/en-us/bot-framework/nodejs/bot-builder-nodejs-state');
+  
+  botStorageService = builder.MemoryBotStorage();
+}
+
+var connector = new builder.ChatConnector({
+  appId: microsoft_app_id,
+  appPassword: microsoft_app_password,
+});
+
+var bot = new builder.UniversalBot(connector).set('storage', botStorageService);
 var intents = new builder.IntentDialog();     
 
 var scenariosPath = path.join(__dirname, 'bot', 'scenarios');

@@ -23,13 +23,16 @@ After connecting your bot to this endpoint, run `npm start`.
 
 
 ## Samples
+
+**NOTE**- Latest changes require that you provide an implementation for a state storage where the bot keeps the dialog's state for production environments. The `index.js` file was modified to apply this change as an example and use Azure Cosmos DB as the state storage for the bot. More information can be found [here](https://docs.microsoft.com/en-us/bot-framework/nodejs/bot-builder-nodejs-state).
+
 There are a few sample files in the root of this project:
 
-## index.js
+### index.js
 This is the default sample which loads the different dialogs from the `bot/scenarios/dialogs.json` file.
 It adds each of the scenarios on the bot and binds it to the relevant RegEx as defined in the scenario.
 
-## loadOnDemand.js
+### loadOnDemand.js
 This file demonstrates how to reload scenarios on-demand in cases that a scenario was modified on the backend.
 In this scenario, if a user was in the middle of a dialog that was updated, he would get a message saying the dialog was changed and that he will need to restart the dialog.
 
@@ -42,7 +45,7 @@ To test this scenario, after starting a dialog such as the `stomachPain` by send
 
 **Comment** If the `version` field in the root of the dialog object is specified, this will be considered as the scenario version. If the version was not specified, the bot will assign a version by hashing the content of the json file.
 
-## router.js
+### router.js
 This file demonstrates how to use [LUIS](https://www.luis.ai/) in order to extract a user intent, and then branch to the next scenario based on the result that was received from LUIS. 
 
 # License

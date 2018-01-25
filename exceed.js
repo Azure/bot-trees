@@ -18,7 +18,7 @@ var connector = new builder.ChatConnector({
     appPassword: microsoft_app_password,
   });
   
-var bot = new builder.UniversalBot(connector);
+var bot = new builder.UniversalBot(connector).set('storage', builder.MemoryBotStorage());
 
 // an implementation of the Navigator interface
 // which will act as the proxy for the backend API

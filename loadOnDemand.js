@@ -16,7 +16,7 @@ var connector = new builder.ChatConnector({
     appPassword: microsoft_app_password,
   });
   
-var bot = new builder.UniversalBot(connector);
+var bot = new builder.UniversalBot(connector).set('storage', builder.MemoryBotStorage());
 var intents = new builder.IntentDialog();     
 
 var scenariosPath = path.join(__dirname, 'bot', 'scenarios');

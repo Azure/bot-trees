@@ -1,4 +1,6 @@
 {
   "MICROSOFT_APP_ID": "",
-  "MICROSOFT_APP_PASSWORD": ""
+  "MICROSOFT_APP_PASSWORD": "",
+  "COSMOS_DB_HOST": "",
+  "COSMOS_DB_KEY": ""
 }
