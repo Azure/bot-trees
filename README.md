@@ -1,5 +1,5 @@
 # Bot Trees
-This is a sample bot app that uses the [bot-graph-dialog](https://github.com/CatalystCode/bot-graph-dialog) extension for dynamically loading graph-based dialogs.
+This is a sample bot app that uses the [bot-graph-dialog](https://github.com/Azure/bot-graph-dialog) extension for dynamically loading graph-based dialogs.
 Use this app as a reference for using the `bot-graph-dialog` extension.
 
 **Read more about the motivation for developing this extension [here](https://www.microsoft.com/developerblog/real-life-code/2016/11/11/Bot-Graph-Dialog.html)**
@@ -11,7 +11,7 @@ Use this app as a reference for using the `bot-graph-dialog` extension.
 You'll need to have a bot provisioned in the developer portal. Follow [these instructions](https://docs.botframework.com/en-us/csharp/builder/sdkreference/gettingstarted.html) (look for the _Registering your Bot with the Microsoft Bot Framework_ section) to register your bot with the Microsoft Bot Framework.
 
 ```
-git clone https://github.com/CatalystCode/bot-trees.git
+git clone https://github.com/Azure/bot-trees.git
 cd bot-trees
 npm install
 ```
